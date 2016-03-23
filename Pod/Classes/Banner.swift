@@ -103,7 +103,7 @@ public class Banner: UIView {
     public let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
         }()
@@ -112,7 +112,7 @@ public class Banner: UIView {
     public let detailLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
         }()
@@ -275,7 +275,7 @@ public class Banner: UIView {
         guard let superview = superview where bannerState != .Gone else { return }
         commonConstraints = self.constraintsWithAttributes([.Leading, .Trailing], .Equal, to: superview)
         superview.addConstraints(commonConstraints)
-        showingConstraint = self.constraintWithAttribute(.Top, .Equal, to: .Top, of: superview)
+        showingConstraint = self.constraintWithAttribute(.Top, .Equal, to: .Top, of: superview, constant: -20)
         let yOffset: CGFloat = -7.0 // Offset the bottom constraint to make room for the shadow to animate off screen.
         hiddenConstraint = self.constraintWithAttribute(.Bottom, .Equal, to: .Top, of: superview, constant: yOffset)
     }
