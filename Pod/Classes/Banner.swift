@@ -7,7 +7,7 @@
 
 import UIKit
 
-private enum BannerState {
+public enum BannerState {
     case Showing, Hidden, Gone
 }
 
