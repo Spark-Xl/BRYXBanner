@@ -128,7 +128,7 @@ public class Banner: UIView {
         return imageView
         }()
     
-    private var bannerState = BannerState.Hidden {
+    public var bannerState = BannerState.Hidden {
         didSet {
             if bannerState != oldValue {
                 forceUpdates()
