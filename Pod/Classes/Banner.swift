@@ -128,6 +128,13 @@ public class Banner: UIView {
         return imageView
         }()
     
+    /// The dismiss button on the left top corner
+    public let dismissButton: UIButton = {
+        let button = UIButton()
+        button.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        return button
+    }()
+    
     public var bannerState = BannerState.Hidden {
         didSet {
             if bannerState != oldValue {
@@ -155,6 +162,8 @@ public class Banner: UIView {
         detailLabel.text = subtitle
         backgroundView.backgroundColor = backgroundColor
         backgroundView.alpha = 0.95
+        dismissButton.setImage(UIImage(named: "banner_dismiss"), forState: .Normal)
+        dismissButton.addTarget(self, action: #selector(didClickDismissButton), forControlEvents: .TouchUpInside)
     }
     
     private func forceUpdates() {
@@ -177,6 +186,10 @@ public class Banner: UIView {
         updateConstraintsIfNeeded()
     }
   
+    public func didClickDismissButton() {
+        dismiss()
+    }
+    
     internal func didTap(recognizer: UITapGestureRecognizer) {
         if dismissesOnTap {
             dismiss()
@@ -260,6 +273,11 @@ public class Banner: UIView {
             contentView.addConstraints(NSLayoutConstraint.defaultConstraintsWithVisualFormat(constraintFormat, options: .DirectionLeadingToTrailing, metrics: nil, views: ["label": view]))
         }
         labelView.addConstraints(NSLayoutConstraint.defaultConstraintsWithVisualFormat("V:|-(10)-[titleLabel][detailLabel]-(10)-|", views: views))
+        contentView.addSubview(dismissButton)
+        dismissButton.addConstraint(dismissButton.constraintWithAttribute(.Width, .Equal, to: 20.0))
+        dismissButton.addConstraint(dismissButton.constraintWithAttribute(.Height, .Equal, to: 20.0))
+        contentView.addConstraint(dismissButton.constraintWithAttribute(.Trailing, .Equal, to: contentView, constant: -5.0))
+        contentView.addConstraint(dismissButton.constraintWithAttribute(.Top, .Equal, to: contentView, constant: 12.0))
     }
     
     required public init?(coder aDecoder: NSCoder) {
