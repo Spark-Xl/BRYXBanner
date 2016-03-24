@@ -163,7 +163,7 @@ public class Banner: UIView {
         backgroundView.backgroundColor = backgroundColor
         backgroundView.alpha = 0.95
         dismissButton.setImage(UIImage(named: "banner_dismiss"), forState: .Normal)
-        dismissButton.addTarget(self, action: #selector(didClickDismissButton), forControlEvents: .TouchUpInside)
+        dismissButton.addTarget(self, action: "didClickDismissButton", forControlEvents: .TouchUpInside)
     }
     
     private func forceUpdates() {
